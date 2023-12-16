@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no " />
+    <title>New Year Countdown</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;300&family=Quicksand&display=swap");
+    
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+        user-select: none;
+       
+      }
+      body{
+    background-image: linear-gradient(rgb(0, 0, 0),rgb(132, 0, 255));
+        height: 100vh;
+      }
+
+      .newsbox {
+      position: relative;
+      top: 40%;
+      left: 3%;
+     
+        width: 92%;
+
+        height: auto;
+        background-image: url("newyear.jpeg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        backdrop-filter: blur(0.1);
+        border-radius: 20px;
+     
+      
+        padding: 10px;
+        box-shadow: 0 0 6px gray;
+        animation: bg 2s infinite;
+      }
+      #sec {
+        color: rgb(86, 171, 247);
+      }
+      @keyframes bg {
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+      .count {
+        width: 100%;
+        height: 100%;
+        margin: 0 auto;
+        border-radius: 20px;
+        background-color: rgba(0, 0, 0, 0.527);
+        padding: 10px;
+      }
+      .newsbox h1 {
+        text-align: center;
+        color: white;
+        font-family: "Inter", sans-serif;
+        font-size: 40px;
+        margin-bottom: 10px;
+      }
+      .time {
+        display: flex;
+        justify-content: center;
+        font-family: "Inter", sans-serif;
+        font-family: "Quicksand", sans-serif;
+      }
+      .time span {
+        color: white;
+        margin: 7px;
+        font-size: 30px;
+      }
+      .time h4 {
+        color: white;
+        font-size: 30px;
+        margin: 10px;
+      }
+
+      .days {
+        display: flex;
+        margin: 10px;
+      }
+      .days h5 {
+        color: white;
+        font-size: 30px;
+      }
+      .d span {
+        font-size: 12px;
+        color: white;
+        display: flex;
+        margin: 10px;
+        line-height: 30px;
+      }
+      #wishes {
+        color: white;
+        font-size: 15px;
+        font-family: "Inter", sans-serif;
+        font-family: "Quicksand", sans-serif;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <!--------count box-->
+    <div class="newsbox">
+      <div class="count">
+        <h1>NEW YEAR 2024</h1>
+        <h1 id="wishes"></h1>
+        <div class="time">
+          <div class="days">
+            <h5 id="day">00</h5>
+            <p class="d"><span>DAYS</span></p>
+          </div>
+
+          <h4 id="hours">00</h4>
+          <span>:</span>
+
+          <h4 id="min">00</h4>
+          <span>:</span>
+
+          <h4 id="sec">00</h4>
+        </div>
+      </div>
+    </div>
+    <script>
+      //coundown
+      var day = document.getElementById("day");
+      var hour = document.getElementById("hours");
+      var min = document.getElementById("min");
+      var sec = document.getElementById("sec");
+      function newyear() {
+        const currentyear = new Date().getFullYear();
+        const newyear = new Date(`January 1 ${currentyear + 1} 00:00:00`);
+
+        const currentdate = new Date();
+        const diff = newyear - currentdate;
+
+        const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+        const hours = Math.floor((diff / 1000 / 60 / 60) % 24);
+        const minuts = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        day.innerHTML = days < 10 ? "0" + days : days;
+        hour.innerHTML = hours < 10 ? "0" + hours : hours;
+        min.innerHTML = minuts < 10 ? "0" + minuts : minuts;
+        sec.innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+        var wishes = document.querySelector("#wishes");
+        var time = document.querySelector(".time");
+        var newsbox = document.querySelector(".newsbox");
+        if (newyear < currentdate) {
+          wishes.innerHTML =
+            "Wishing you a New Year filled with joy, success, and countless opportunities. May each day bring you closer to your dreams. Happy New Year!";
+          time.style.display = "none";
+        }
+      }
+      setInterval(newyear, 1000);
+    </script>
+  </body>
+</html>
